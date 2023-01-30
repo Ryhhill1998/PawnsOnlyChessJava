@@ -16,6 +16,10 @@ public abstract class Pawn {
         this.directionMultiplier = directionMultiplier;
     }
 
+    public String getColour() {
+        return colour;
+    }
+
     public String getSymbol() {
         return symbol;
     }
@@ -35,6 +39,8 @@ public abstract class Pawn {
         for (int[] coordinates : possibleMoves) {
             if (coordinates[0] == x && coordinates[1] == y) {
                 moveAllowed = true;
+                xPosition = coordinates[0];
+                yPosition = coordinates[1];
                 break;
             }
         }
@@ -49,7 +55,7 @@ public abstract class Pawn {
 
         if (board.spaceIsFree(xPosition, yPosition + directionMultiplier)) {
             coordinates[0] = xPosition;
-            coordinates[1] = yPosition;
+            coordinates[1] = yPosition + directionMultiplier;
             possibleMoves.add(coordinates);
         }
 
