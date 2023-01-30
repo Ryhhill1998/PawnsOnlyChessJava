@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Pawn {
 
@@ -7,6 +8,7 @@ public abstract class Pawn {
     private int xPosition;
     private int yPosition;
     private int directionMultiplier;
+    private boolean hasMoved;
 
     public Pawn(String colour, String symbol, int xPosition, int yPosition, int directionMultiplier) {
         this.colour = colour;
@@ -14,6 +16,7 @@ public abstract class Pawn {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.directionMultiplier = directionMultiplier;
+        hasMoved = false;
     }
 
     public String getColour() {
@@ -41,6 +44,7 @@ public abstract class Pawn {
                 moveAllowed = true;
                 xPosition = coordinates[0];
                 yPosition = coordinates[1];
+                hasMoved = true;
                 break;
             }
         }
@@ -57,6 +61,14 @@ public abstract class Pawn {
             coordinates[0] = xPosition;
             coordinates[1] = yPosition + directionMultiplier;
             possibleMoves.add(coordinates);
+
+            coordinates = new int[2];
+
+            if (!hasMoved && board.spaceIsFree(xPosition, yPosition + (2 * directionMultiplier))) {
+                coordinates[0] = xPosition;
+                coordinates[1] = yPosition + (2 * directionMultiplier);
+                possibleMoves.add(coordinates);
+            }
         }
 
         return possibleMoves;
