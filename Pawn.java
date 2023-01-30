@@ -71,6 +71,40 @@ public abstract class Pawn {
             }
         }
 
+        coordinates = new int[2];
+
+        // right take
+        int x = xPosition - directionMultiplier;
+        int y = yPosition + directionMultiplier;
+
+        if (takeIsPossible(board, x, y)) {
+            coordinates[0] = x;
+            coordinates[1] = y;
+            possibleMoves.add(coordinates);
+        }
+
+        // left take
+        x = xPosition + directionMultiplier;
+        y = yPosition + directionMultiplier;
+
+        if (takeIsPossible(board, x, y)) {
+            coordinates[0] = x;
+            coordinates[1] = y;
+            possibleMoves.add(coordinates);
+        }
+
         return possibleMoves;
+    }
+
+    private boolean takeIsPossible(Board board, int x, int y) {
+        boolean isPossible = false;
+
+        Pawn pawnAtPosition = board.getPawnAtPosition(x, y);
+
+        if (pawnAtPosition != null && !pawnAtPosition.getColour().equals(colour)) {
+            isPossible = true;
+        }
+
+        return isPossible;
     }
 }

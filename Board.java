@@ -29,16 +29,10 @@ public class Board {
         return gameBoard[y][x];
     }
 
-    public boolean movePawn(int x, int y, int newX, int newY) {
-        boolean pawnMoved = false;
-
-        if (spaceIsFree(newX, newY)) {
-            Pawn pawn = gameBoard[y][x];
-            gameBoard[y][x] = null;
-            gameBoard[newY][newX] = pawn;
-        }
-
-        return pawnMoved;
+    public void movePawn(int x, int y, int newX, int newY) {
+        Pawn pawn = gameBoard[y][x];
+        gameBoard[y][x] = null;
+        gameBoard[newY][newX] = pawn;
     }
 
     @Override
