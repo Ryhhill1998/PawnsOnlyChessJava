@@ -52,7 +52,7 @@ public abstract class Pawn {
         return moveAllowed;
     }
 
-    public ArrayList<int[]> getPossibleMoves(Board board) {
+    private ArrayList<int[]> getPossibleMoves(Board board) {
         ArrayList<int[]> possibleMoves = new ArrayList<>();
         
         int[] coordinates = new int[2];
@@ -86,6 +86,8 @@ public abstract class Pawn {
         // left take
         x = xPosition + directionMultiplier;
         y = yPosition + directionMultiplier;
+
+        coordinates = new int[2];
 
         if (takeIsPossible(board, x, y)) {
             coordinates[0] = x;

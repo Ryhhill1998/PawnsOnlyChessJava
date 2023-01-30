@@ -1,26 +1,29 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();
-        System.out.println(game.getGameBoard());
 
-        System.out.println();
-        game.movePawn(2, 6, 2, 4);
         System.out.println(game.getGameBoard());
+        System.out.println();
 
-        System.out.println();
-        game.movePawn(3, 1, 3, 3);
-        System.out.println(game.getGameBoard());
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println();
-        game.movePawn(2, 4, 3, 3);
-        System.out.println(game.getGameBoard());
+        while (!game.isGameOver()) {
+            System.out.println(game.getTurn() + "'s turn!");
 
-        System.out.println();
-        game.movePawn(1, 1, 1, 3);
-        System.out.println(game.getGameBoard());
+            System.out.print("Enter the x and y coordinates of the piece you wish to move: ");
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
 
-        System.out.println();
-        game.movePawn(3, 3, 3, 2);
-        System.out.println(game.getGameBoard());
+            System.out.print("Enter the x and y coordinates of the space you wish to move this piece to: ");
+            int newX = scanner.nextInt();
+            int newY = scanner.nextInt();
+
+            game.movePawn(x, y, newX, newY);
+
+            System.out.println(game.getGameBoard());
+            System.out.println();
+        }
     }
 }
