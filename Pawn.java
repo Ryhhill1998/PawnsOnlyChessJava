@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Pawn {
+public abstract class Pawn {
 
     private String colour;
     private String symbol;
@@ -8,20 +8,24 @@ public class Pawn {
     private int yPosition;
     private int directionMultiplier;
 
-    public Pawn(String colour, int xPosition, int yPosition) {
+    public Pawn(String colour, String symbol, int xPosition, int yPosition, int directionMultiplier) {
         this.colour = colour;
+        this.symbol = symbol;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
-        initialiseSymbol();
-        initialiseDirectionMultiplier();
+        this.directionMultiplier = directionMultiplier;
     }
 
-    private void initialiseSymbol() {
-        symbol = colour.split("")[0];
+    public String getSymbol() {
+        return symbol;
     }
 
-    private void initialiseDirectionMultiplier() {
-        directionMultiplier = colour.equals("White") ? 1 : -1;
+    public int getPositionX() {
+        return xPosition;
+    }
+
+    public int getPositionY() {
+        return yPosition;
     }
 
     public boolean move(Board board, int x, int y) {

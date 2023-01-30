@@ -1,20 +1,20 @@
 public class Board {
 
-    private String[][] gameBoard;
+    public static final int BOARD_SIZE = 8;
+
+    private Pawn[][] gameBoard;
 
     public Board() {
-        gameBoard = new String[8][8];
+        gameBoard = new Pawn[BOARD_SIZE][BOARD_SIZE];
     }
 
-    public String stringifyBoard() {
-        
-    }
-
-    public boolean addPiece(String symbol, int x, int y) {
+    public boolean addPawn(Pawn pawnToAdd) {
         boolean pieceAdded = false;
+        int x = pawnToAdd.getPositionX();
+        int y = pawnToAdd.getPositionY();
 
         if (spaceIsFree(x, y)) {
-            gameBoard[y][x] = symbol;
+            gameBoard[y][x] = pawnToAdd;
             pieceAdded = true;
         }
 
@@ -22,6 +22,35 @@ public class Board {
     }
 
     public boolean spaceIsFree(int x, int y) {
-        return gameBoard[y][x].equals(" ");
+        return gameBoard[y][x] == null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("     0     1     2     3     4     5     6     7\n");
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            output.append("  +-----+-----+-----+-----+-----+-----+-----+-----+\n");
+
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (j == 0) {
+                    output.append(i).append(" |  ");
+                }
+
+                if (gameBoard[i][j] == null) {
+                    output.append(" ");
+                } else {
+                    output.append(gameBoard[i][j].getSymbol());
+                }
+
+                output.append("  |  ");
+            }
+
+            output.append("\n");
+        }
+
+        output.append("  +-----+-----+-----+-----+-----+-----+-----+-----+\n");
+        return output.toString();
     }
 }
